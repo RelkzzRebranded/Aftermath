@@ -611,8 +611,8 @@ do -- Main
                 do -- Misc
                     do -- Player Hitbox Expand
                         for _, Player in Functions.Normal:GetPlayers() do
-                            if Player ~= nil and Player.Character ~= nil and Player ~= players.LocalPlayer then
-                                Functions.Normal:SetPlayerHeadSize(plr.Character)
+                            if Player ~= nil and Player.Character ~= nil and Player ~= Player.LocalPlayer then
+                                Functions.Normal:SetPlayerHeadSize(Player.Character)
                             end
                         end
                     end
