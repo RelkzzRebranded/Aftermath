@@ -566,10 +566,10 @@ do -- Main
             do -- Misc
                 function Functions.Normal:SetPlayerHeadSize(player)
                     pcall(function()
-                        if FeatureTable.Misc.HitboxExpand.Enabled and player.Character ~= nil and Functions.Normal:GetPlayerHeadCollider(player) then
+                        if FeatureTable.Misc.Player.HitboxExpand.Enabled and player.Character ~= nil and Functions.Normal:GetPlayerHeadCollider(player) then
 							local head = Functions.Normal:GetPlayerHeadCollider(player)
 
-                        	head.Size = Vector3.new(FeatureTable.Misc.HitboxExpand.Size, FeatureTable.Misc.HitboxExpand.Size, FeatureTable.Misc.HitboxExpand.Size)
+                        	head.Size = Vector3.new(FeatureTable.Misc.Player.HitboxExpand.Size, FeatureTable.Misc.Player.HitboxExpand.Size, FeatureTable.Misc.Player.HitboxExpand.Size)
                             head.Transparency = 0
                         end
                     end)
