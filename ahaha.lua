@@ -420,6 +420,11 @@ do -- Main
                             Lighting[Property] = Value
                         end
                     end
+                    function Functions.Normal:SetAtmosphere(Property, Value)
+                        if FeatureTable.Visuals.Lighting.OverrideAtmosphere.Enabled then
+                            Lighting:FindFirstChildOfClass('Atmosphere')[Property] = Value
+                        end
+                    end
                 end
 
                 do -- Player
@@ -605,35 +610,6 @@ do -- Main
                     Functions.ItemESP:ApplyESP(item)
                 end
                 while task.wait() do
-                    do -- Cham ESP
-                        for _, Player in Functions.Normal:GetPlayers() do
-                            if Player ~= nil then
-                                
-                                local Highlight = Player:FindFirstChildOfClass("Highlight")
-                        
-                                if FeatureTable.Visuals.Chams.Enabled then
-                                    
-                                    if not Highlight then
-                                        Highlight = Instance.new("Highlight", Player.WorldCharacter)
-                                    end
-                        
-                                    Highlight.Enabled = true
-                                    Highlight.Adornee = Player
-                                    Highlight.FillColor = FeatureTable.Visuals.Chams.FillColor
-                                    Highlight.OutlineColor = FeatureTable.Visuals.Chams.OutlineColor
-                                    Highlight.FillTransparency = FeatureTable.Visuals.Chams.FillTransparency
-                                    Highlight.OutlineTransparency = FeatureTable.Visuals.Chams.OutlineTransparency
-                                    Highlight.DepthMode = FeatureTable.Visuals.Chams.VisibleOnly and Enum.HighlightDepthMode.Occluded or Enum.HighlightDepthMode.AlwaysOnTop
-              
-                                else
-    
-                                    if Highlight then
-                                        Highlight:Destroy()
-                                    end
-                                end
-                            end
-                        end
-                    end
     
                     do -- Misc
                         do -- Player Hitbox Expand
@@ -659,6 +635,37 @@ do -- Main
                             end
                         end
                     end
+
+                    do -- Cham ESP
+                        for _, Player in Functions.Normal:GetPlayers() do
+                            if Player ~= nil then
+                                
+                                local Highlight = Player.WorldCharacter:FindFirstChildOfClass("Highlight")
+                        
+                                if FeatureTable.Visuals.Chams.Enabled then
+                                    
+                                    if not Highlight then
+                                        Highlight = Instance.new("Highlight", Player.WorldCharacter)
+                                    end
+                        
+                                    Highlight.Enabled = true
+                                    Highlight.Adornee = Player.WorldCharacter
+                                    Highlight.FillColor = FeatureTable.Visuals.Chams.FillColor
+                                    Highlight.OutlineColor = FeatureTable.Visuals.Chams.OutlineColor
+                                    Highlight.FillTransparency = FeatureTable.Visuals.Chams.FillTransparency
+                                    Highlight.OutlineTransparency = FeatureTable.Visuals.Chams.OutlineTransparency
+                                    Highlight.DepthMode = FeatureTable.Visuals.Chams.VisibleOnly and Enum.HighlightDepthMode.Occluded or Enum.HighlightDepthMode.AlwaysOnTop
+              
+                                else
+    
+                                    if Highlight then
+                                        Highlight:Destroy()
+                                    end
+                                end
+                            end
+                        end
+                    end
+
                 end
             end)
         end
@@ -686,7 +693,11 @@ do -- Main
                     Functions.Normal:SetAmbient("ColorShift_Bottom", FeatureTable.Visuals.Lighting.OverrideAmbient.Color)
                 end)
 
-                Functions.Normal:SetAtmosphere("Density", FeatureTable.Visuals.Lighting.OverrideAtmosphere.Density)
+                Lighting:FindFirstChildOfClass('Atmosphere'):GetPropertyChangedSignal("Density"):Connect(function()
+                    Functions.Normal:SetAtmosphere("Density", FeatureTable.Visuals.Lighting.OverrideAtmosphere.Density)
+                end)
+
+                
                 
             end
             item_spawns.ChildAdded:Connect(Functions.ItemESP.ApplyESP)
