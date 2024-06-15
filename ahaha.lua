@@ -406,8 +406,8 @@ do -- Main
 
                     function Functions.Normal:GetPlayerHeadCollider(Player)
                         local HeadCollider
-                        if Player.Character ~= nil then
-                            HeadCollider = Player.Character.ServerColliderHead
+                        if Player.Character ~= nil and Player.Character:FindFirstChild('ServerColliderHead') then
+                            HeadCollider = Player.Character:FindFirstChild('ServerColliderHead')
                         end
                         return HeadCollider
                     end
