@@ -389,7 +389,7 @@ do -- Main
 
                 do -- Lighting
                     function Functions.Normal:SetAmbient(Property, Value)
-                        if FeatureTable.Visuals.Lighting.OverrideAimbient.Enabled then
+                        if FeatureTable.Visuals.Lighting.OverrideAmbient.Enabled then
                             Lighting[Property] = Value
                         end
                     end
@@ -611,8 +611,8 @@ do -- Main
                 do -- Misc
                     do -- Player Hitbox Expand
                         for _, Player in Functions.Normal:GetPlayers() do
-                            if Player ~= nil and Player.Character ~= nil and Player ~= Players.LocalPlayer then
-                                Functions.Normal:SetPlayerHeadSize(Player.Character)
+                            if Player ~= nil and Player.Character ~= nil and Player ~= players.LocalPlayer then
+                                Functions.Normal:SetPlayerHeadSize(plr.Character)
                             end
                         end
                     end
