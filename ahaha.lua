@@ -442,7 +442,7 @@ do -- Main
                     
                         local connections = {}
                         table.insert(connections, run_service.RenderStepped:Connect(function()
-                            local vec3, onscreen = camera:WorldToViewportPoint(object:GetPivot().Position)
+                            local vec3, onscreen = Camera:WorldToViewportPoint(object:GetPivot().Position)
                             if onscreen and FeatureTable.Visuals.ItemsEsp.Enabled then
                                 text.Visible = true 
                                 text.Position = Vector2.new(vec3.X, vec3.Y)
