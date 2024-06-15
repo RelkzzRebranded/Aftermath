@@ -283,37 +283,8 @@ do -- Main
                 Callback = function(Value)
                     FeatureTable.Visuals.ItemsEsp.Enabled = Value
                 end
-            }):AddColorPicker('WeaponEspColor', {
-                Default = Color3.fromRGB(83, 186, 30),
-                Title = 'Weapon Esp Color',
-                Transparency = 0,
-
-                Callback = function(Value)
-                    if FeatureTable.Visuals.ItemsEsp.Enabled then
-                        FeatureTable.Visuals.ItemsEsp.WeaponColor.Color = Value
-                    end
-                end
-            }):AddColorPicker('AttachmentEspColor', {
-                Default = Color3.fromRGB(255, 166, 0),
-                Title = 'Attachment Esp Color',
-                Transparency = 0,
-
-                Callback = function(Value)
-                    if FeatureTable.Visuals.ItemsEsp.Enabled then
-                        FeatureTable.Visuals.ItemsEsp.AttachmentsColor.Color = Value
-                    end
-                end
-            }):AddColorPicker('DefaultItemEspColor', {
-                Default = Color3.fromRGB(255, 255, 255),
-                Title = 'Defualt Item Esp Color',
-                Transparency = 0,
-
-                Callback = function(Value)
-                    if FeatureTable.Visuals.ItemsEsp.Enabled then
-                        FeatureTable.Visuals.ItemsEsp.DefaultColor.Color = Value
-                    end
-                end
             })
+
             Sections.ItemVisualSettings:AddLabel('Gun Text Color'):AddColorPicker('GunEspColor', {
                 Default = Color3.fromRGB(151, 48, 250),
                 Title = 'Gun Esp Color',
@@ -326,7 +297,7 @@ do -- Main
                 end
             })
             Sections.ItemVisualSettings:AddLabel('Weapon Text Color'):AddColorPicker('GunEspColor', {
-                Default = Color3.fromRGB(151, 48, 250),
+                Default = Color3.fromRGB(83, 186, 30),
                 Title = 'Gun Esp Color',
                 Transparency = 0,
 
@@ -337,7 +308,7 @@ do -- Main
                 end
             })
             Sections.ItemVisualSettings:AddLabel('Attachment Text Color'):AddColorPicker('GunEspColor', {
-                Default = Color3.fromRGB(151, 48, 250),
+                Default = Color3.fromRGB(255, 166, 0),
                 Title = 'Gun Esp Color',
                 Transparency = 0,
 
@@ -348,7 +319,7 @@ do -- Main
                 end
             })
             Sections.ItemVisualSettings:AddLabel('Default Text Color'):AddColorPicker('GunEspColor', {
-                Default = Color3.fromRGB(151, 48, 250),
+                Default = Color3.fromRGB(255,255,255),
                 Title = 'Gun Esp Color',
                 Transparency = 0,
 
@@ -447,10 +418,9 @@ do -- Main
                     end
 
                     -- Happy now? You are so annoying 
-                    -- Not happy. just kidding idgaf
                     function Functions.Normal:GetPlayers()
                         local PlayerList = {}
-                        for _, Handicaps in Players:GetPlayers() do
+                        for _, Handicaps in Players:GetChildren() do
                             table.insert(PlayerList, Handicaps.Character)
                         end
                         return PlayerList
@@ -594,10 +564,10 @@ do -- Main
             end
 
             do -- Misc
-                function Functions.Normal:SetPlayerHeadSize(character)
+                function Functions.Normal:SetPlayerHeadSize(player)
                     pcall(function()
-                        if FeatureTable.Misc.HitboxExpand.Enabled and character ~= nil and character:FindFirstChild('ServerColliderHead') then
-							local head = character:FindFirstChild('ServerColliderHead')
+                        if FeatureTable.Misc.HitboxExpand.Enabled and player.Character ~= nil and Functions.Normal:GetPlayerHeadCollider(player) then
+							local head = Functions.Normal:GetPlayerHeadCollider(player)
 
                         	head.Size = Vector3.new(FeatureTable.Misc.HitboxExpand.Size, FeatureTable.Misc.HitboxExpand.Size, FeatureTable.Misc.HitboxExpand.Size)
                             head.Transparency = 0
@@ -645,9 +615,9 @@ do -- Main
 
                 do -- Misc
                     do -- Player Hitbox Expand
-                        for _, Character in Functions.Normal:GetPlayers() do
-                            if Character ~= nil and Character ~= nil and Character ~= Players.LocalPlayer.Character then
-                                Functions.Normal:SetPlayerHeadSize(Character)
+                        for _, Player in Functions.Normal:GetPlayers() do
+                            if Player ~= nil and Player ~= nil and Player ~= Players.LocalPlayer then
+                                Functions.Normal:SetPlayerHeadSize(Player)
                             end
                         end
                     end
