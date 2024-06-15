@@ -615,9 +615,11 @@ do -- Main
     
                     do -- Misc
                         do -- Player Hitbox Expand
-                            for _, Player in Functions.Normal:GetPlayers() do
-                                if Player ~= nil and Player ~= nil and Player ~= Players.LocalPlayer then
-                                    Functions.Normal:SetPlayerHeadSize(Player)
+                            while task.wait() do
+                                for _, Player in Functions.Normal:GetPlayers() do
+                                    if Player ~= nil and Player ~= nil and Player ~= Players.LocalPlayer and FeatureTable.Misc.Player.HitboxExpand.Enabled then
+                                        Functions.Normal:SetPlayerHeadSize(Player)
+                                    end
                                 end
                             end
                         end
