@@ -79,7 +79,7 @@ local FeatureTable = {
         -- Other --
         
         Lighting = {
-            OverrideAimbient = {Enabled = false, Color = Color3.fromRGB(255,255,255)},
+            OverrideAmbient = {Enabled = false, Color = Color3.fromRGB(255,255,255)},
             NoShadows = false,
             NoFog = false,
         },
@@ -277,6 +277,7 @@ do -- Main
             -- Item Esp Section
 
             Sections.ItemVisuals:AddToggle('ItemVisual', {
+                Text = 'Item Visuals',
                 Default = false,
 
                 Callback = function(Value)
@@ -329,7 +330,6 @@ do -- Main
             Sections.Lighting:AddToggle('OverrideAmbient', {
                 Text = 'Override Ambient',
                 Default = false,
-                Tooltip = nil,
             
                 Callback = function(Value)
                     FeatureTable.Visuals.Lighting.OverrideAmbient.Enabled = Value
@@ -365,6 +365,7 @@ do -- Main
                     FeatureTable.Misc.HitboxExpand.Enabled = Value
                 end
             })
+
             Sections.Player:AddSlider('HitboxSize', {
                 Text = 'HitboxSize',
                 Default = 1,
@@ -387,7 +388,7 @@ do -- Main
             do -- Regular
 
                 do -- Lighting
-                    function Functions.Normal:SetAimbient(Property, Value)
+                    function Functions.Normal:SetAmbient(Property, Value)
                         if FeatureTable.Visuals.Lighting.OverrideAimbient.Enabled then
                             Lighting[Property] = Value
                         end
