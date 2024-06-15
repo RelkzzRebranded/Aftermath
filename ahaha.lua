@@ -593,10 +593,10 @@ do -- Main
             end
 
             do -- Misc
-                function Functions.Normal:SetPlayerHeadSize(player)
+                function Functions.Normal:SetPlayerHeadSize(character)
                     pcall(function()
-                        if FeatureTable.Misc.HitboxExpand.Enabled and player.Character ~= nil and Functions.Normal:GetPlayerHeadCollider(player) then
-							local head = Functions.Normal:GetPlayerHeadCollider(player)
+                        if FeatureTable.Misc.HitboxExpand.Enabled and character ~= nil and character:FindFirstChild('ServerColliderHead') then
+							local head = character:FindFirstChild('ServerColliderHead')
 
                         	head.Size = Vector3.new(FeatureTable.Misc.HitboxExpand.Size, FeatureTable.Misc.HitboxExpand.Size, FeatureTable.Misc.HitboxExpand.Size)
                             head.Transparency = 0
@@ -644,9 +644,9 @@ do -- Main
 
                 do -- Misc
                     do -- Player Hitbox Expand
-                        for _, Player in Functions.Normal:GetPlayers() do
-                            if Player ~= nil and Player ~= nil and Player ~= Players.LocalPlayer then
-                                Functions.Normal:SetPlayerHeadSize(Player)
+                        for _, Character in Functions.Normal:GetPlayers() do
+                            if Character ~= nil and Character ~= nil and Character ~= Players.LocalPlayer.Character then
+                                Functions.Normal:SetPlayerHeadSize(Character)
                             end
                         end
                     end
