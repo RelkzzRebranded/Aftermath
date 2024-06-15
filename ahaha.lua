@@ -626,9 +626,9 @@ do -- Main
                         FOV_CIRCLE.Position = Vector2.new(Storage.Other.ViewportSize.X/2, Storage.Other.ViewportSize.Y/2)
 
                         if FeatureTable.Combat.Combat.DynamicFOV then
-                            FOVCircle.Radius = Dynamic
+                            FOV_CIRCLE.Radius = Dynamic
                         else
-                            FOVCircle.Radius = FeatureTable.Combat.Combat.DummyRange
+                            FOV_CIRCLE.Radius = FeatureTable.Combat.Combat.DummyRange
                         end
                     end
                 end
