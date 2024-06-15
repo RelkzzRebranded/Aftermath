@@ -298,7 +298,7 @@ do -- Main
             })
             Sections.ItemVisualSettings:AddLabel('Weapon Text Color'):AddColorPicker('GunEspColor', {
                 Default = Color3.fromRGB(83, 186, 30),
-                Title = 'Gun Esp Color',
+                Title = 'Weapon Esp Color',
                 Transparency = 0,
 
                 Callback = function(Value)
@@ -309,7 +309,7 @@ do -- Main
             })
             Sections.ItemVisualSettings:AddLabel('Attachment Text Color'):AddColorPicker('GunEspColor', {
                 Default = Color3.fromRGB(255, 166, 0),
-                Title = 'Gun Esp Color',
+                Title = 'Attachment Esp Color',
                 Transparency = 0,
 
                 Callback = function(Value)
@@ -320,7 +320,7 @@ do -- Main
             })
             Sections.ItemVisualSettings:AddLabel('Default Text Color'):AddColorPicker('GunEspColor', {
                 Default = Color3.fromRGB(255,255,255),
-                Title = 'Gun Esp Color',
+                Title = 'Default Esp Color',
                 Transparency = 0,
 
                 Callback = function(Value)
