@@ -671,10 +671,14 @@ do -- Main
         end
         
         do -- Connections
+            item_spawns.ChildAdded:Connect(function(item)
+                Functions.ItemESP:ApplyESP(item)
+            end)
+
             Camera:GetPropertyChangedSignal("ViewportSize"):Connect(function()
                 Storage.Other.ViewportSize = Camera.ViewportSize
             end)
-
+            
             do
 
                 Lighting:GetPropertyChangedSignal("Ambient"):Connect(function()
@@ -700,7 +704,7 @@ do -- Main
                 
                 
             end
-            item_spawns.ChildAdded:Connect(Functions.ItemESP.ApplyESP)
+            
         end
     end
 end
