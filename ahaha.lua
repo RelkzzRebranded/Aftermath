@@ -413,6 +413,7 @@ do -- Main
                     end
 
                     -- do not ask me why i am doing this, its just to make it look like im smart
+                    -- This automatically just gets the players character
                     function Functions.Normal:GetPlayers()
                         local PlayerList = {}
                         for i,Teams in Players:GetChildren() do
@@ -581,8 +582,6 @@ do -- Main
                         if Player ~= nil then
                             
                             local Highlight = Player:FindFirstChildOfClass("Highlight")
-                            local Team = Functions.Normal:GetTeam(Player)
-                            local TeamColor = Team.TeamColor
                     
                             if FeatureTable.Visuals.Chams.Enabled then
                                 
@@ -611,8 +610,8 @@ do -- Main
                 do -- Misc
                     do -- Player Hitbox Expand
                         for _, Player in Functions.Normal:GetPlayers() do
-                            if Player ~= nil and Player.Character ~= nil and Player ~= Player.LocalPlayer then
-                                Functions.Normal:SetPlayerHeadSize(Player.Character)
+                            if Player ~= nil and Player ~= nil and Player ~= Players.LocalPlayer then
+                                Functions.Normal:SetPlayerHeadSize(Player)
                             end
                         end
                     end
