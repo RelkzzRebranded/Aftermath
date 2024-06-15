@@ -80,6 +80,7 @@ local FeatureTable = {
         
         Lighting = {
             OverrideAmbient = {Enabled = false, Color = Color3.fromRGB(255,255,255)},
+            OverrideAtmosphere = {Enabled = false, Density = 0}
             NoShadows = false,
             NoFog = false,
         },
@@ -359,6 +360,27 @@ do -- Main
                     end
                 end
             })
+            Sections.Lighting:AddToggle('Atmosphere', {
+                Text = 'Atmosphere Density',
+                Default = false,
+            
+                Callback = function(Value)
+                    FeatureTable.Visuals.Lighting.OverrideAtmosphere.Enabled = Value
+                end
+            })
+            
+            Sections.Lighting:AddSlider('AtmosphereDensity', {
+                Text = 'Density',
+                Default = 0,
+                Min = 0,
+                Max = 1,
+                Rounding = 1,
+                Compact = false,
+
+                Callback = function(Value)
+                    FeatureTable.Visuals.Lighting.OverrideAtmosphere.Density = Value
+                end
+            })
         end
 
         do -- Misc Tab
@@ -592,7 +614,7 @@ do -- Main
                                 if FeatureTable.Visuals.Chams.Enabled then
                                     
                                     if not Highlight then
-                                        Highlight = Instance.new("Highlight", Player)
+                                        Highlight = Instance.new("Highlight", Player.WorldCharacter)
                                     end
                         
                                     Highlight.Enabled = true
@@ -615,11 +637,9 @@ do -- Main
     
                     do -- Misc
                         do -- Player Hitbox Expand
-                            while task.wait() do
-                                for _, Player in Functions.Normal:GetPlayers() do
-                                    if Player ~= nil and Player ~= nil and Player ~= Players.LocalPlayer and FeatureTable.Misc.Player.HitboxExpand.Enabled then
-                                        Functions.Normal:SetPlayerHeadSize(Player)
-                                    end
+                            for _, Player in Functions.Normal:GetPlayers() do
+                                if Player ~= nil and Player ~= nil and Player ~= Players.LocalPlayer then
+                                    Functions.Normal:SetPlayerHeadSize(Player)
                                 end
                             end
                         end
@@ -665,6 +685,8 @@ do -- Main
                 Lighting:GetPropertyChangedSignal("ColorShift_Bottom"):Connect(function()
                     Functions.Normal:SetAmbient("ColorShift_Bottom", FeatureTable.Visuals.Lighting.OverrideAmbient.Color)
                 end)
+
+                Functions.Normal:SetAtmosphere("Density", FeatureTable.Visuals.Lighting.OverrideAtmosphere.Density)
                 
             end
             item_spawns.ChildAdded:Connect(Functions.ItemESP.ApplyESP)
