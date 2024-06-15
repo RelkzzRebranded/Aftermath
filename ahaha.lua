@@ -79,7 +79,7 @@ local FeatureTable = {
         -- Other --
         
         Lighting = {
-            OverrideAimbient = {Enabled = false, Color = Color3.fromRGB(255,255,255)},
+            OverrideAmbient = {Enabled = false, Color = Color3.fromRGB(255,255,255)},
             NoShadows = false,
             NoFog = false,
         },
@@ -277,6 +277,7 @@ do -- Main
             -- Item Esp Section
 
             Sections.ItemVisuals:AddToggle('ItemVisual', {
+                Text = 'Item Visuals',
                 Default = false,
 
                 Callback = function(Value)
@@ -329,7 +330,6 @@ do -- Main
             Sections.Lighting:AddToggle('OverrideAmbient', {
                 Text = 'Override Ambient',
                 Default = false,
-                Tooltip = nil,
             
                 Callback = function(Value)
                     FeatureTable.Visuals.Lighting.OverrideAmbient.Enabled = Value
@@ -365,6 +365,7 @@ do -- Main
                     FeatureTable.Misc.HitboxExpand.Enabled = Value
                 end
             })
+
             Sections.Player:AddSlider('HitboxSize', {
                 Text = 'HitboxSize',
                 Default = 1,
@@ -387,7 +388,7 @@ do -- Main
             do -- Regular
 
                 do -- Lighting
-                    function Functions.Normal:SetAimbient(Property, Value)
+                    function Functions.Normal:SetAmbient(Property, Value)
                         if FeatureTable.Visuals.Lighting.OverrideAimbient.Enabled then
                             Lighting[Property] = Value
                         end
@@ -442,7 +443,7 @@ do -- Main
                     
                         local connections = {}
                         table.insert(connections, run_service.RenderStepped:Connect(function()
-                            local vec3, onscreen = camera:WorldToViewportPoint(object:GetPivot().Position)
+                            local vec3, onscreen = Camera:WorldToViewportPoint(object:GetPivot().Position)
                             if onscreen and FeatureTable.Visuals.ItemsEsp.Enabled then
                                 text.Visible = true 
                                 text.Position = Vector2.new(vec3.X, vec3.Y)
