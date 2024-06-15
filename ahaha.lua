@@ -303,7 +303,7 @@ do -- Main
 
                 Callback = function(Value)
                     if FeatureTable.Visuals.ItemsEsp.Enabled then
-                        FeatureTable.Visuals.ItemsEsp.GunColor.Color = Value
+                        FeatureTable.Visuals.ItemsEsp.WeaponColor.Color = Value
                     end
                 end
             })
@@ -314,7 +314,7 @@ do -- Main
 
                 Callback = function(Value)
                     if FeatureTable.Visuals.ItemsEsp.Enabled then
-                        FeatureTable.Visuals.ItemsEsp.GunColor.Color = Value
+                        FeatureTable.Visuals.ItemsEsp.AttachmentsColor.Color = Value
                     end
                 end
             })
@@ -325,7 +325,7 @@ do -- Main
 
                 Callback = function(Value)
                     if FeatureTable.Visuals.ItemsEsp.Enabled then
-                        FeatureTable.Visuals.ItemsEsp.GunColor.Color = Value
+                        FeatureTable.Visuals.ItemsEsp.DefaultColor.Color = Value
                     end
                 end
             })
@@ -584,19 +584,19 @@ do -- Main
                 end
 
                 do -- Cham ESP
-                    for _, Character in Functions.Normal:GetPlayers() do
-                        if Character ~= nil then
+                    for _, Player in Functions.Normal:GetPlayers() do
+                        if Player ~= nil then
                             
-                            local Highlight = Character:FindFirstChildOfClass("Highlight")
+                            local Highlight = Player:FindFirstChildOfClass("Highlight")
                     
                             if FeatureTable.Visuals.Chams.Enabled then
                                 
                                 if not Highlight then
-                                    Highlight = Instance.new("Highlight", Character)
+                                    Highlight = Instance.new("Highlight", Player)
                                 end
                     
                                 Highlight.Enabled = true
-                                Highlight.Adornee = Character
+                                Highlight.Adornee = Player
                                 Highlight.FillColor = FeatureTable.Visuals.Chams.FillColor
                                 Highlight.OutlineColor = FeatureTable.Visuals.Chams.OutlineColor
                                 Highlight.FillTransparency = FeatureTable.Visuals.Chams.FillTransparency
