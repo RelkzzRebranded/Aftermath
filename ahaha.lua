@@ -614,19 +614,19 @@ do -- Main
                 end
 
                 do -- Cham ESP
-                    for _, Player in Functions.Normal:GetPlayers() do
-                        if Player ~= nil then
+                    for _, Character in Functions.Normal:GetPlayers() do
+                        if Character ~= nil then
                             
-                            local Highlight = Player:FindFirstChildOfClass("Highlight")
+                            local Highlight = Character:FindFirstChildOfClass("Highlight")
                     
                             if FeatureTable.Visuals.Chams.Enabled then
                                 
                                 if not Highlight then
-                                    Highlight = Instance.new("Highlight", Player)
+                                    Highlight = Instance.new("Highlight", Character)
                                 end
                     
                                 Highlight.Enabled = true
-                                Highlight.Adornee = Player
+                                Highlight.Adornee = Character
                                 Highlight.FillColor = FeatureTable.Visuals.Chams.FillColor
                                 Highlight.OutlineColor = FeatureTable.Visuals.Chams.OutlineColor
                                 Highlight.FillTransparency = FeatureTable.Visuals.Chams.FillTransparency
