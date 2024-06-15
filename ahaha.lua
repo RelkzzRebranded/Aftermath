@@ -367,7 +367,7 @@ do -- Main
                 Default = false,
 
                 Callback = function(Value)
-                    FeatureTable.Misc.HitboxExpand.Enabled = Value
+                    FeatureTable.Misc.Player.HitboxExpand.Enabled = Value
                 end
             })
 
@@ -380,7 +380,7 @@ do -- Main
                 Compact = false,
 
                 Callback = function(Value)
-                    FeatureTable.Misc.HitboxExpand.Size = Value
+                    FeatureTable.Misc.Player.HitboxExpand.Size = Value
                 end
             })
         end
