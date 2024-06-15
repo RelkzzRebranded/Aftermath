@@ -47,8 +47,8 @@ local Sections = {
     -- Visuals Tab
     Visuals = Tabs.VisualsTab:AddLeftGroupbox('Visuals'),
     VisualSettings = Tabs.VisualsTab:AddRightGroupbox('Configuration'),
-    ItemVisuals = Tab.VisualsTab:AddLeftGroupbox('Item Visual'),
-    ItemVisualSettings = Tab.VisualsTab:AddRightGroupbox('Item Configuration'),
+    ItemVisuals = Tabs.VisualsTab:AddLeftGroupbox('Item Visual'),
+    ItemVisualSettings = Tabs.VisualsTab:AddRightGroupbox('Item Configuration'),
     Lighting = Tabs.VisualsTab:AddLeftGroupbox('Lighting'),
 
     -- Misc Tab
