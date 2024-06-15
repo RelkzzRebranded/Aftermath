@@ -593,7 +593,7 @@ do -- Main
                                 end
                     
                                 Highlight.Enabled = true
-                                Highlight.Adornee = Player
+                                Highlight.Adornee = Player.Character
                                 Highlight.FillColor = FeatureTable.Visuals.Chams.FillColor
                                 Highlight.OutlineColor = FeatureTable.Visuals.Chams.OutlineColor
                                 Highlight.FillTransparency = FeatureTable.Visuals.Chams.FillTransparency
