@@ -447,9 +447,10 @@ do -- Main
                     end
 
                     -- Happy now? You are so annoying 
+                    -- Not happy. just kidding idgaf
                     function Functions.Normal:GetPlayers()
                         local PlayerList = {}
-                        for _, Handicaps in Players:GetChildren() do
+                        for _, Handicaps in Players:GetPlayers() do
                             table.insert(PlayerList, Handicaps.Character)
                         end
                         return PlayerList
