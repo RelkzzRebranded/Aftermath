@@ -414,11 +414,11 @@ do -- Main
 
                     -- do not ask me why i am doing this, its just to make it look like im smart
                     -- This automatically just gets the players character
-                    function Functions.Normal:GetPlayers()
+                    function Functions.Normal:GetPlayersCharacter()
                         local PlayerList = {}
-                        for i,Teams in Players:GetChildren() do
-                            for i,Players in Teams:GetChildren() do
-                                table.insert(PlayerList, Players)
+                        for i,player in Players:GetPlayers() do
+                            if player.Character then
+                                table.insert(PlayerList, player.Character)
                             end
                         end
                         return PlayerList
