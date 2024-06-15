@@ -362,7 +362,7 @@ do -- Main
         end
 
         do -- Misc Tab
-            Sections.Player:AddToggle('HitboxExpand', {
+            Sections.Player:AddToggle('HitboxExpander', {
                 Text = 'Hitbox Expand',
                 Default = false,
 
