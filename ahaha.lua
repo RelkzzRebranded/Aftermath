@@ -472,6 +472,7 @@ do -- Main
                     end
 
                     function Functions.ItemESP:ApplyESP(item)
+						if not item then return end
                         if not item:IsA('Model') then return end 
                         
                         local name, z_index, type, color = item.Name, 0, 'Default', FeatureTable.Visuals.ItemsEsp.DefaultColor.Color
