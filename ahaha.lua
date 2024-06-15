@@ -80,7 +80,7 @@ local FeatureTable = {
         
         Lighting = {
             OverrideAmbient = {Enabled = false, Color = Color3.fromRGB(255,255,255)},
-            OverrideAtmosphere = {Enabled = false, Density = 0}
+            OverrideAtmosphere = {Enabled = false, Density = 0},
             NoShadows = false,
             NoFog = false,
         },
