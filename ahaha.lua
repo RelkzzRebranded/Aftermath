@@ -430,16 +430,16 @@ do -- Main
                 do -- Player
                     function Functions.Normal:GetPlayerModel(Player)
                         local WorldCharacter
-                        if Player.Character ~= nil and Player.Character:FindFirstChild('ServerColliderHead') then
-                            WorldCharacter = Player.Character.WorldCharacter
+                        if Player ~= nil and Player:FindFirstChild('WorldCharacter') then
+                            WorldCharacter = Player.WorldCharacter
                         end
                         return WorldCharacter
                     end
 
                     function Functions.Normal:GetPlayerHeadCollider(Player)
                         local HeadCollider
-                        if Player.Character ~= nil then
-                            HeadCollider = Player.Character.ServerColliderHead
+                        if Player ~= nil and Player:FindFirstChild('ServerColliderHead') then
+                            HeadCollider = Player.ServerColliderHead
                         end
                         return HeadCollider
                     end
@@ -640,11 +640,11 @@ do -- Main
                         for _, Player in Functions.Normal:GetPlayers() do
                             if Player ~= nil then
                                 
-                                local Highlight = Player.WorldCharacter:FindFirstChildOfClass("Highlight")
+                                local Highlight
                         
                                 if FeatureTable.Visuals.Chams.Enabled then
                                     
-                                    if not Highlight then
+                                    if not Player:FindFirstChild("Highlight") then
                                         Highlight = Instance.new("Highlight", Player.WorldCharacter)
                                     end
                         
