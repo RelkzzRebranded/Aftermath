@@ -474,91 +474,90 @@ do -- Main
                     end
 
                     function Functions.ItemESP:ApplyESP(item)
-                        pcall(function()
-                            if not item:IsA('Model') then return end 
+                        if item == nil then return end
+                        if not item:IsA('Model') then return end 
                         
-                            local name, z_index, type, color = item.Name, 0, 'Default', FeatureTable.Visuals.ItemsEsp.DefaultColor.Color
-                            if item.Name == 'WorldModel' and item:FindFirstChild('Static') then
-                                local highest_score, gun_name = 0, nil
-                                local item_static = item:FindFirstChild('Static')
-                                for _, gun in gun_data:GetChildren() do
-                                    local gun_score = 0
-                                    local world_model = gun:FindFirstChild('WorldModel') -- fists doesnt have world model
-                                
-                                    if world_model then
-                                        local gun_static = world_model:FindFirstChild('Static') -- weapons doesnt have static
-                                        if gun_static then
-                                            for _, gun_static_child in gun_static:GetChildren() do
-                                                if item_static:FindFirstChild(gun_static_child.Name) then
-                                                    gun_score += 1
-                                                    if gun_score > highest_score then
-                                                        highest_score = gun_score
-                                                        gun_name = (gun:FindFirstChild('DisplayName') and gun.DisplayName.Value) or gun.Name 
-                                                    end
+                        local name, z_index, type, color = item.Name, 0, 'Default', FeatureTable.Visuals.ItemsEsp.DefaultColor.Color
+                        if item.Name == 'WorldModel' and item:FindFirstChild('Static') then
+                            local highest_score, gun_name = 0, nil
+                            local item_static = item:FindFirstChild('Static')
+                            for _, gun in gun_data:GetChildren() do
+                                local gun_score = 0
+                                local world_model = gun:FindFirstChild('WorldModel') -- fists doesnt have world model
+                            
+                                if world_model then
+                                    local gun_static = world_model:FindFirstChild('Static') -- weapons doesnt have static
+                                    if gun_static then
+                                        for _, gun_static_child in gun_static:GetChildren() do
+                                            if item_static:FindFirstChild(gun_static_child.Name) then
+                                                gun_score += 1
+                                                if gun_score > highest_score then
+                                                    highest_score = gun_score
+                                                    gun_name = (gun:FindFirstChild('DisplayName') and gun.DisplayName.Value) or gun.Name 
                                                 end
                                             end
                                         end
                                     end
                                 end
-                                z_index = 2
-                                color = FeatureTable.Visuals.ItemsEsp.GunColor.Color
-                                name = gun_name or 'Gun'
-                                type = 'Gun'
                             end
-                            if item.Name == 'WorldModel' and (not item:FindFirstChild('Static')) then
-                                local highest_score, weapon_name = 0, nil
-                                for _, weapon in gun_data:GetChildren() do
-                                    local weapon_score = 0
-                                    local world_model = weapon:FindFirstChild('WorldModel') -- fists doesnt have world model
-                                
-                                    if world_model then
-                                        for _, weapon_child in world_model:GetChildren() do
-                                            if item:FindFirstChild(weapon_child.Name) then
-                                                weapon_score += 1
-                                                if weapon_score > highest_score then
-                                                    highest_score = weapon_score
-                                                    weapon_name = (weapon:FindFirstChild('DisplayName') and weapon.DisplayName.Value) or weapon.Name 
-                                                end
+                            z_index = 2
+                            color = FeatureTable.Visuals.ItemsEsp.GunColor.Color
+                            name = gun_name or 'Gun'
+                            type = 'Gun'
+                        end
+                        if item.Name == 'WorldModel' and (not item:FindFirstChild('Static')) then
+                            local highest_score, weapon_name = 0, nil
+                            for _, weapon in gun_data:GetChildren() do
+                                local weapon_score = 0
+                                local world_model = weapon:FindFirstChild('WorldModel') -- fists doesnt have world model
+                            
+                                if world_model then
+                                    for _, weapon_child in world_model:GetChildren() do
+                                        if item:FindFirstChild(weapon_child.Name) then
+                                            weapon_score += 1
+                                            if weapon_score > highest_score then
+                                                highest_score = weapon_score
+                                                weapon_name = (weapon:FindFirstChild('DisplayName') and weapon.DisplayName.Value) or weapon.Name 
                                             end
                                         end
                                     end
                                 end
-                                z_index = 1
-                                name = weapon_name or 'Weapon'
-                                color = FeatureTable.Visuals.ItemsEsp.WeaponColor.Color
-                                type = 'Weapon'
                             end
-                            if item.Name == 'WorldData' then
-                                local highest_score, attachment_name = 0, nil
-                                for _, attachment in attachments:GetChildren() do
-                                    local attachment_score = 0
-                                    local world_data = attachment:FindFirstChild('WorldData') -- fists doesnt have world model
-                                
-                                    if world_data then
-                                        for _, weapon_child in world_data:GetChildren() do
-                                            if item:FindFirstChild(weapon_child.Name) then
-                                                attachment_score += 1
-                                                if attachment_score > highest_score then
-                                                    highest_score = attachment_score
-                                                    attachment_name = (attachment:FindFirstChild('DisplayName') and attachment.DisplayName.Value) or attachment.Name 
-                                                end
+                            z_index = 1
+                            name = weapon_name or 'Weapon'
+                            color = FeatureTable.Visuals.ItemsEsp.WeaponColor.Color
+                            type = 'Weapon'
+                        end
+                        if item.Name == 'WorldData' then
+                            local highest_score, attachment_name = 0, nil
+                            for _, attachment in attachments:GetChildren() do
+                                local attachment_score = 0
+                                local world_data = attachment:FindFirstChild('WorldData') -- fists doesnt have world model
+                            
+                                if world_data then
+                                    for _, weapon_child in world_data:GetChildren() do
+                                        if item:FindFirstChild(weapon_child.Name) then
+                                            attachment_score += 1
+                                            if attachment_score > highest_score then
+                                                highest_score = attachment_score
+                                                attachment_name = (attachment:FindFirstChild('DisplayName') and attachment.DisplayName.Value) or attachment.Name 
                                             end
                                         end
                                     end
                                 end
-                                name = attachment_name or 'Attachment'
-                                color = FeatureTable.Visuals.ItemsEsp.AttachmentsColor.Color
-                                type = 'Attachment'
                             end
-                        
-                            Functions.ItemESP:AddInstance(item, {
-                                Text = name,
-                                Color = color,
-                                Size = 12,
-                                Outline = true,
-                                ZIndex = z_index
-                            }, type)
-                        end)
+                            name = attachment_name or 'Attachment'
+                            color = FeatureTable.Visuals.ItemsEsp.AttachmentsColor.Color
+                            type = 'Attachment'
+                        end
+                    
+                        Functions.ItemESP:AddInstance(item, {
+                            Text = name,
+                            Color = color,
+                            Size = 12,
+                            Outline = true,
+                            ZIndex = z_index
+                        }, type)
                     end
                 end
             end
