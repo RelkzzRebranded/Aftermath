@@ -395,9 +395,9 @@ do -- Main
 
             Sections.Player:AddSlider('HitboxSize', {
                 Text = 'HitboxSize',
-                Default = 1,
+                Default = 2.5,
                 Min = 0,
-                Max = 3,
+                Max = 6.5,
                 Rounding = 1,
                 Compact = false,
 
@@ -477,7 +477,8 @@ do -- Main
                             if onscreen and FeatureTable.Visuals.ItemsEsp.Enabled then
                                 text.Visible = true 
                                 text.Position = Vector2.new(vec3.X, vec3.Y)
-                    
+                                
+                                -- Stupid implementation, but it works eh?
                                 if Type == 'Gun' then
                                     text.Color = FeatureTable.Visuals.ItemsEsp.GunColor.Color
                                 elseif Type == 'Weapon' then
@@ -536,7 +537,7 @@ do -- Main
                                 local highest_score, weapon_name = 0, nil
                                 for _, weapon in gun_data:GetChildren() do
                                     local weapon_score = 0
-                                    local world_model = weapon:FindFirstChild('WorldModel') -- fists doesnt have world model
+                                    local world_model = weapon:FindFirstChild('WorldModel') 
                                 
                                     if world_model then
                                         for _, weapon_child in world_model:GetChildren() do
@@ -559,7 +560,7 @@ do -- Main
                                 local highest_score, attachment_name = 0, nil
                                 for _, attachment in attachments:GetChildren() do
                                     local attachment_score = 0
-                                    local world_data = attachment:FindFirstChild('WorldData') -- fists doesnt have world model
+                                    local world_data = attachment:FindFirstChild('WorldData') 
                                 
                                     if world_data then
                                         for _, weapon_child in world_data:GetChildren() do
@@ -637,19 +638,18 @@ do -- Main
                     end
 
                     do -- Cham ESP
-                        for _, Player in Functions.Normal:GetPlayers() do
-                            if Player ~= nil then
-                                
-                                local Highlight
-                        
+                        for _, champlayer in Functions.Normal:GetPlayers() do
+                            if champlayer ~= nil then
+                                local actualplayer = Players:GetPlayerFromCharacter(champlayer)
+                                local Highlight = actualplayer:FindFirstChildOfClass('Highlight')
+
                                 if FeatureTable.Visuals.Chams.Enabled then
-                                    
-                                    if not Player:FindFirstChild("Highlight") then
-                                        Highlight = Instance.new("Highlight", Player.WorldCharacter)
+
+                                    if not champlayer:FindFirstChild('Highlight') then
+                                        Highlight = Instance.new('Highlight', actualplayer)
                                     end
-                        
                                     Highlight.Enabled = true
-                                    Highlight.Adornee = Player.WorldCharacter
+                                    Highlight.Adornee = champlayer.WorldCharacter
                                     Highlight.FillColor = FeatureTable.Visuals.Chams.FillColor
                                     Highlight.OutlineColor = FeatureTable.Visuals.Chams.OutlineColor
                                     Highlight.FillTransparency = FeatureTable.Visuals.Chams.FillTransparency
@@ -663,6 +663,7 @@ do -- Main
                                     end
                                 end
                             end
+
                         end
                     end
 
