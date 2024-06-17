@@ -479,15 +479,18 @@ do -- Main
 								text.Position = Vector2.new(vec3.X, vec3.Y)
 								
 								-- Stupid implementation, but it works eh?
-								if Type == 'Gun' then
-									text.Color = FeatureTable.Visuals.ItemsEsp.GunColor.Color
-								elseif Type == 'Weapon' then
-									text.Color = FeatureTable.Visuals.ItemsEsp.WeaponColor.Color
-								elseif Type == 'Attachment' then
-									text.Color = FeatureTable.Visuals.ItemsEsp.AttachmentsColor.Color
-								elseif Type == 'Default' then
-									text.Color = FeatureTable.Visuals.ItemsEsp.DefaultColor.Color
-								end
+								-- if Type == 'Gun' then
+								-- 	text.Color = FeatureTable.Visuals.ItemsEsp.GunColor.Color
+								-- elseif Type == 'Weapon' then
+								-- 	text.Color = FeatureTable.Visuals.ItemsEsp.WeaponColor.Color
+								-- elseif Type == 'Attachment' then
+								-- 	text.Color = FeatureTable.Visuals.ItemsEsp.AttachmentsColor.Color
+								-- elseif Type == 'Default' then
+								-- 	text.Color = FeatureTable.Visuals.ItemsEsp.DefaultColor.Color
+								-- end
+								
+								-- if type is Default then it will get color for index "DefaultColor"
+								text.Color = FeatureTable.Visuals.ItemsEsp[`{Type}Color`].Color
 					
 							else
 								text.Visible = false 
@@ -574,9 +577,9 @@ do -- Main
 										end
 									end
 								end
-								name = attachment_name or 'Attachment'
+								name = attachment_name or 'Attachments'
 								color = FeatureTable.Visuals.ItemsEsp.AttachmentsColor.Color
-								type = 'Attachment'
+								type = 'Attachments'
 							end
 						
 							Functions.ItemESP:AddInstance(item, {
