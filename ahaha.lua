@@ -488,9 +488,13 @@ do -- Main
 								-- elseif Type == 'Default' then
 								-- 	text.Color = FeatureTable.Visuals.ItemsEsp.DefaultColor.Color
 								-- end
-								
+
 								-- if type is Default then it will get color for index "DefaultColor"
-								text.Color = FeatureTable.Visuals.ItemsEsp[`{Type}Color`].Color
+								if FeatureTable.Visuals.ItemsEsp[`{Type}Color`] then
+									text.Color = FeatureTable.Visuals.ItemsEsp[`{Type}Color`].Color
+								else
+									warn(`{Type}Color doesnt exist!`)
+								end
 					
 							else
 								text.Visible = false 
