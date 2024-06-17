@@ -5,11 +5,11 @@ local ThemeManager = loadstring(game:HttpGet(repo .. 'addons/ThemeManager.lua'))
 local SaveManager = loadstring(game:HttpGet(repo .. 'addons/SaveManager.lua'))()
 
 local Window = Library:CreateWindow({
-    Title = 'aftermath sex hack (made by AlrightyBrickmane / Pentel)',
-    Center = true,
-    AutoShow = true,
-    TabPadding = 8,
-    MenuFadeTime = 0.2
+	Title = 'aftermath sex hack (made by AlrightyBrickmane / Pentel)',
+	Center = true,
+	AutoShow = true,
+	TabPadding = 8,
+	MenuFadeTime = 0.2
 })
 -- Services
 local replicated_storage = cloneref(game:GetService('ReplicatedStorage'))
@@ -33,686 +33,686 @@ local workspace_gravity = workspace.Gravity
 
 -- Tables
 local Tabs = {
-    AimbotTab = Window:AddTab('Aimbot'),
-    VisualsTab = Window:AddTab('Visuals'),
-    MiscTab = Window:AddTab('Misc'),
-    Settings = Window:AddTab('Settings'),
+	AimbotTab = Window:AddTab('Aimbot'),
+	VisualsTab = Window:AddTab('Visuals'),
+	MiscTab = Window:AddTab('Misc'),
+	Settings = Window:AddTab('Settings'),
 }
 
 local Sections = {
-    -- Aimbot Tab
-    Aimbot = Tabs.AimbotTab:AddLeftGroupbox('Aimbot'),
-    AimbotSettings = Tabs.AimbotTab:AddRightGroupbox('Aimbot Settings'),
+	-- Aimbot Tab
+	Aimbot = Tabs.AimbotTab:AddLeftGroupbox('Aimbot'),
+	AimbotSettings = Tabs.AimbotTab:AddRightGroupbox('Aimbot Settings'),
 
-    -- Visuals Tab
-    Visuals = Tabs.VisualsTab:AddLeftGroupbox('Visuals'),
-    VisualSettings = Tabs.VisualsTab:AddRightGroupbox('Configuration'),
-    ItemVisuals = Tabs.VisualsTab:AddLeftGroupbox('Item Visual'),
-    ItemVisualSettings = Tabs.VisualsTab:AddRightGroupbox('Item Configuration'),
-    Lighting = Tabs.VisualsTab:AddLeftGroupbox('Lighting'),
+	-- Visuals Tab
+	Visuals = Tabs.VisualsTab:AddLeftGroupbox('Visuals'),
+	VisualSettings = Tabs.VisualsTab:AddRightGroupbox('Configuration'),
+	ItemVisuals = Tabs.VisualsTab:AddLeftGroupbox('Item Visual'),
+	ItemVisualSettings = Tabs.VisualsTab:AddRightGroupbox('Item Configuration'),
+	Lighting = Tabs.VisualsTab:AddLeftGroupbox('Lighting'),
 
-    -- Misc Tab
-    Player = Tabs.MiscTab:AddLeftGroupbox('Player')
+	-- Misc Tab
+	Player = Tabs.MiscTab:AddLeftGroupbox('Player')
 }
 
 local FeatureTable = {
-    Combat = {
-        Aimbot = {Enabled = false, DummyRange = 0, DynamicFOV = false, Prediction = false, PredictionValue = 0},
-        Hitpart = "Head",
-    },
-    Visuals = {
+	Combat = {
+		Aimbot = {Enabled = false, DummyRange = 0, DynamicFOV = false, Prediction = false, PredictionValue = 0},
+		Hitpart = "Head",
+	},
+	Visuals = {
 
-        -- Features --
+		-- Features --
 
-        Chams = {Enabled = false, FillColor = Color3.fromRGB(255,255,255), OutlineColor = Color3.fromRGB(255,255,255), VisibleOnly = false, FillTransaprency = 0, OutlineTransparency = 0},
-        Dynamic = true,
+		Chams = {Enabled = false, FillColor = Color3.fromRGB(255,255,255), OutlineColor = Color3.fromRGB(255,255,255), VisibleOnly = false, FillTransaprency = 0, OutlineTransparency = 0},
+		Dynamic = true,
 
-        -- Item Esp --
+		-- Item Esp --
 
-        ItemsEsp = {Enabled = false,
-            GunColor = {Color = Color3.fromRGB(151, 48, 250)},
-            WeaponColor = {Color = Color3.fromRGB(83, 186, 30)},
-            AttachmentsColor = {Color = Color3.fromRGB(255, 166, 0)},
-            DefaultColor = {Color = Color3.fromRGB(255,255,255)},
-        },
+		ItemsEsp = {Enabled = false,
+			GunColor = {Color = Color3.fromRGB(151, 48, 250)},
+			WeaponColor = {Color = Color3.fromRGB(83, 186, 30)},
+			AttachmentsColor = {Color = Color3.fromRGB(255, 166, 0)},
+			DefaultColor = {Color = Color3.fromRGB(255,255,255)},
+		},
 
-        -- Other --
-        
-        Lighting = {
-            OverrideAmbient = {Enabled = false, Color = Color3.fromRGB(255,255,255)},
-            OverrideAtmosphere = {Enabled = false, Density = 0},
-            NoShadows = false,
-            NoFog = false,
-        },
-    },
-    Misc = {
-        Player = {
-            Gravity = {Enabled = false, Value = workspace_gravity},
-            HitboxExpand = {Enabled = false, Size = 2.5},
-        },
-    },
+		-- Other --
+		
+		Lighting = {
+			OverrideAmbient = {Enabled = false, Color = Color3.fromRGB(255,255,255)},
+			OverrideAtmosphere = {Enabled = false, Density = 0},
+			NoShadows = false,
+			NoFog = false,
+		},
+	},
+	Misc = {
+		Player = {
+			Gravity = {Enabled = false, Value = workspace_gravity},
+			HitboxExpand = {Enabled = false, Size = 2.5},
+		},
+	},
 }
 
 local Storage = {
-    Other = {
-        ViewportSize = Camera.ViewportSize,
-        ClosestPlayer,
-    },
+	Other = {
+		ViewportSize = Camera.ViewportSize,
+		ClosestPlayer,
+	},
 }
 
 local Functions = {
-    Normal = {},
-    ItemESP = {},
+	Normal = {},
+	ItemESP = {},
 }
 
 -- Objects
 local FOV_CIRCLE = Drawing.new('Circle')
 do -- Drawing Object Properties
 
-    do -- Circle
+	do -- Circle
 
-        FOV_CIRCLE.Transparency = 1
-        FOV_CIRCLE.Visible = false
-        FOV_CIRCLE.Color = Color3.fromRGB(255, 255, 255)
-        FOV_CIRCLE.Radius = 0
+		FOV_CIRCLE.Transparency = 1
+		FOV_CIRCLE.Visible = false
+		FOV_CIRCLE.Color = Color3.fromRGB(255, 255, 255)
+		FOV_CIRCLE.Radius = 0
 
-    end
+	end
 
 end
 -- Rest
 
 
 do -- Main
-    Library:Notify('This script is made by Brickmane (mando_mercury) and xytz_l (yuiz_)')
-    Library:Notify('Aimbot and Player is still not implemented so enjoy with item esp and hitbox expander')
-    do -- Elements
-        do -- Aimbot Tab
-            Sections.Aimbot:AddToggle('Aimbot', {
-                Text = 'Aimbot',
-                Default = false,
-                Tooltip = 'Lock on to players',
-                
-                Callback = function(Value)
-                    FeatureTable.Combat.Aimbot.Enabled = false
-                end
-            })
-            
-            Sections.Aimbot:AddToggle('VisualiseRange', {
-                Text = 'Visualise Range',
-                Default = false,
-                
-                Callback = function(Value)
-                    FOV_CIRCLE.Color = Value
-                end
-            }):AddColorPicker('VisualiseRange', {
-                Default = Color3.fromRGB(255, 255, 255),
-                Title = 'Range Color',
-                Transparency = 0,
+	Library:Notify('This script is made by Brickmane (mando_mercury) and xytz_l (yuiz_)')
+	Library:Notify('Aimbot and Player is still not implemented so enjoy with item esp and hitbox expander')
+	do -- Elements
+		do -- Aimbot Tab
+			Sections.Aimbot:AddToggle('Aimbot', {
+				Text = 'Aimbot',
+				Default = false,
+				Tooltip = 'Lock on to players',
+				
+				Callback = function(Value)
+					FeatureTable.Combat.Aimbot.Enabled = false
+				end
+			})
+			
+			Sections.Aimbot:AddToggle('VisualiseRange', {
+				Text = 'Visualise Range',
+				Default = false,
+				
+				Callback = function(Value)
+					FOV_CIRCLE.Color = Value
+				end
+			}):AddColorPicker('VisualiseRange', {
+				Default = Color3.fromRGB(255, 255, 255),
+				Title = 'Range Color',
+				Transparency = 0,
 
-                Callback = function(Value)
-                    FOV_CIRCLE.Color = Value
-                end
-            })
+				Callback = function(Value)
+					FOV_CIRCLE.Color = Value
+				end
+			})
 
-            Sections.Aimbot:AddToggle('DynamicRange', {
-                Text = 'Dynamic Range',
-                Default = false,
-                Tooltip = "Scale with in Camera's Field Of View",
+			Sections.Aimbot:AddToggle('DynamicRange', {
+				Text = 'Dynamic Range',
+				Default = false,
+				Tooltip = "Scale with in Camera's Field Of View",
 
-                Callback = function(Value)
-                    FeatureTable.Combat.Aimbot.DynamicFOV = Value
-                end
-            })
+				Callback = function(Value)
+					FeatureTable.Combat.Aimbot.DynamicFOV = Value
+				end
+			})
 
-            Sections.Aimbot:AddSlider('AimbotRange', {
-                Text = 'Range',
-                Default = 0,
-                Min = 0,
-                Max = 1000,
-                Rounding = 1,
+			Sections.Aimbot:AddSlider('AimbotRange', {
+				Text = 'Range',
+				Default = 0,
+				Min = 0,
+				Max = 1000,
+				Rounding = 1,
 
-                Callback = function(Value)
-                    FeatureTable.Combat.Aimbot.DummyRange = Value
-                end
-            })
+				Callback = function(Value)
+					FeatureTable.Combat.Aimbot.DummyRange = Value
+				end
+			})
 
-            Sections.Aimbot:AddDropdown('Aimpart', {
-                Values = { 'Head', 'UpperTorso' },
-                Default = 1,
-                Multi = false,
+			Sections.Aimbot:AddDropdown('Aimpart', {
+				Values = { 'Head', 'UpperTorso' },
+				Default = 1,
+				Multi = false,
 
-                Text = 'Aim part',
+				Text = 'Aim part',
 
-                Callback = function(Value)
-                    FeatureTable.Combat.HitPart = Value
-                end
-            })
+				Callback = function(Value)
+					FeatureTable.Combat.HitPart = Value
+				end
+			})
 
-            -- Aimbot Settings
+			-- Aimbot Settings
 
-            Sections.AimbotSettings:AddToggle('Prediction', {
-                Text = 'Prediction',
-                Default = false,
+			Sections.AimbotSettings:AddToggle('Prediction', {
+				Text = 'Prediction',
+				Default = false,
 
-                Callback = function(Value)
-                    FeatureTable.Combat.Aimbot.Prediction = Value
-                end
-            })
+				Callback = function(Value)
+					FeatureTable.Combat.Aimbot.Prediction = Value
+				end
+			})
 
-            Sections.AimbotSettings:AddSlider('Prediction Value', {
-                Text = 'Prediction Value',
-                Default = 0,
-                Min = 0,
-                Max = 10,
-                Rounding = 1,
+			Sections.AimbotSettings:AddSlider('Prediction Value', {
+				Text = 'Prediction Value',
+				Default = 0,
+				Min = 0,
+				Max = 10,
+				Rounding = 1,
 
-                Callback = function(Value)
-                    FeatureTable.Combat.Aimbot.PredictionValue = Value
-                end
-            })
-        end
+				Callback = function(Value)
+					FeatureTable.Combat.Aimbot.PredictionValue = Value
+				end
+			})
+		end
 
-        do -- Visuals Tab
-            Sections.Visuals:AddToggle('Chams', {
-                Text = 'Chams',
-                Default = false,
+		do -- Visuals Tab
+			Sections.Visuals:AddToggle('Chams', {
+				Text = 'Chams',
+				Default = false,
 
-                Callback = function(Value)
-                    FeatureTable.Visuals.Chams.Enabled = Value
-                end
-            }):AddColorPicker('FillColor', {
-                Default = Color3.fromRGB(255, 255, 255),
-                Title = 'Fill Color',
-                Transparency = 0,
-            
-                Callback = function(Value)
-                    FeatureTable.Visuals.Chams.FillColor = Value
-                end
-            }):AddColorPicker('OutlineColor', {
-                Default = Color3.fromRGB(255, 255, 255),
-                Title = 'Outline Color',
-                Transparency = 0,
-            
-                Callback = function(Value)
-                    FeatureTable.Visuals.Chams.OutlineColor = Value
-                end
-            })
+				Callback = function(Value)
+					FeatureTable.Visuals.Chams.Enabled = Value
+				end
+			}):AddColorPicker('FillColor', {
+				Default = Color3.fromRGB(255, 255, 255),
+				Title = 'Fill Color',
+				Transparency = 0,
+			
+				Callback = function(Value)
+					FeatureTable.Visuals.Chams.FillColor = Value
+				end
+			}):AddColorPicker('OutlineColor', {
+				Default = Color3.fromRGB(255, 255, 255),
+				Title = 'Outline Color',
+				Transparency = 0,
+			
+				Callback = function(Value)
+					FeatureTable.Visuals.Chams.OutlineColor = Value
+				end
+			})
 
-            -- Settings
+			-- Settings
 
-            Sections.VisualSettings:AddToggle('ChamVisOnly', {
-                Text = 'Chams Opaque or Visible Only',
-                Default = false,
+			Sections.VisualSettings:AddToggle('ChamVisOnly', {
+				Text = 'Chams Opaque or Visible Only',
+				Default = false,
 
-                Callback = function(Value)
-                    FeatureTable.Visuals.Chams.VisibleOnly = Value
-                end
-            })
+				Callback = function(Value)
+					FeatureTable.Visuals.Chams.VisibleOnly = Value
+				end
+			})
 
-            Sections.VisualSettings:AddSlider('ChamFillTransparency', {
-                Text = 'Chams Fill Transparency',
-                Default = 0,
-                Min = 0,
-                Max = 1,
-                Rounding = 1,
-                Compact = false,
+			Sections.VisualSettings:AddSlider('ChamFillTransparency', {
+				Text = 'Chams Fill Transparency',
+				Default = 0,
+				Min = 0,
+				Max = 1,
+				Rounding = 1,
+				Compact = false,
 
-                Callback = function(Value)
-                    FeatureTable.Visuals.Chams.FillTransparency = Value
-                end
-            })
+				Callback = function(Value)
+					FeatureTable.Visuals.Chams.FillTransparency = Value
+				end
+			})
 
-            Sections.VisualSettings:AddSlider('ChamOutlineTransparency', {
-                Text = 'Chams Outline Transparency',
-                Default = 0,
-                Min = 0,
-                Max = 1,
-                Rounding = 1,
-                Compact = false,
+			Sections.VisualSettings:AddSlider('ChamOutlineTransparency', {
+				Text = 'Chams Outline Transparency',
+				Default = 0,
+				Min = 0,
+				Max = 1,
+				Rounding = 1,
+				Compact = false,
 
-                Callback = function(Value)
-                    FeatureTable.Visuals.Chams.OutlineTransparency = Value
-                end
-            })
+				Callback = function(Value)
+					FeatureTable.Visuals.Chams.OutlineTransparency = Value
+				end
+			})
 
-            -- Item Esp Section
+			-- Item Esp Section
 
-            Sections.ItemVisuals:AddToggle('ItemVisual', {
-                Text = 'Item Visuals',
-                Default = false,
+			Sections.ItemVisuals:AddToggle('ItemVisual', {
+				Text = 'Item Visuals',
+				Default = false,
 
-                Callback = function(Value)
-                    FeatureTable.Visuals.ItemsEsp.Enabled = Value
-                end
-            })
+				Callback = function(Value)
+					FeatureTable.Visuals.ItemsEsp.Enabled = Value
+				end
+			})
 
-            Sections.ItemVisualSettings:AddLabel('Gun Text Color'):AddColorPicker('GunEspColor', {
-                Default = Color3.fromRGB(151, 48, 250),
-                Title = 'Gun Esp Color',
-                Transparency = 0,
+			Sections.ItemVisualSettings:AddLabel('Gun Text Color'):AddColorPicker('GunEspColor', {
+				Default = Color3.fromRGB(151, 48, 250),
+				Title = 'Gun Esp Color',
+				Transparency = 0,
 
-                Callback = function(Value)
-                    if FeatureTable.Visuals.ItemsEsp.Enabled then
-                        FeatureTable.Visuals.ItemsEsp.GunColor.Color = Value
-                    end
-                end
-            })
-            Sections.ItemVisualSettings:AddLabel('Weapon Text Color'):AddColorPicker('GunEspColor', {
-                Default = Color3.fromRGB(83, 186, 30),
-                Title = 'Weapon Esp Color',
-                Transparency = 0,
+				Callback = function(Value)
+					if FeatureTable.Visuals.ItemsEsp.Enabled then
+						FeatureTable.Visuals.ItemsEsp.GunColor.Color = Value
+					end
+				end
+			})
+			Sections.ItemVisualSettings:AddLabel('Weapon Text Color'):AddColorPicker('GunEspColor', {
+				Default = Color3.fromRGB(83, 186, 30),
+				Title = 'Weapon Esp Color',
+				Transparency = 0,
 
-                Callback = function(Value)
-                    if FeatureTable.Visuals.ItemsEsp.Enabled then
-                        FeatureTable.Visuals.ItemsEsp.WeaponColor.Color = Value
-                    end
-                end
-            })
-            Sections.ItemVisualSettings:AddLabel('Attachment Text Color'):AddColorPicker('GunEspColor', {
-                Default = Color3.fromRGB(255, 166, 0),
-                Title = 'Attachment Esp Color',
-                Transparency = 0,
+				Callback = function(Value)
+					if FeatureTable.Visuals.ItemsEsp.Enabled then
+						FeatureTable.Visuals.ItemsEsp.WeaponColor.Color = Value
+					end
+				end
+			})
+			Sections.ItemVisualSettings:AddLabel('Attachment Text Color'):AddColorPicker('GunEspColor', {
+				Default = Color3.fromRGB(255, 166, 0),
+				Title = 'Attachment Esp Color',
+				Transparency = 0,
 
-                Callback = function(Value)
-                    if FeatureTable.Visuals.ItemsEsp.Enabled then
-                        FeatureTable.Visuals.ItemsEsp.AttachmentsColor.Color = Value
-                    end
-                end
-            })
-            Sections.ItemVisualSettings:AddLabel('Default Text Color'):AddColorPicker('GunEspColor', {
-                Default = Color3.fromRGB(255,255,255),
-                Title = 'Default Esp Color',
-                Transparency = 0,
+				Callback = function(Value)
+					if FeatureTable.Visuals.ItemsEsp.Enabled then
+						FeatureTable.Visuals.ItemsEsp.AttachmentsColor.Color = Value
+					end
+				end
+			})
+			Sections.ItemVisualSettings:AddLabel('Default Text Color'):AddColorPicker('GunEspColor', {
+				Default = Color3.fromRGB(255,255,255),
+				Title = 'Default Esp Color',
+				Transparency = 0,
 
-                Callback = function(Value)
-                    if FeatureTable.Visuals.ItemsEsp.Enabled then
-                        FeatureTable.Visuals.ItemsEsp.DefaultColor.Color = Value
-                    end
-                end
-            })
+				Callback = function(Value)
+					if FeatureTable.Visuals.ItemsEsp.Enabled then
+						FeatureTable.Visuals.ItemsEsp.DefaultColor.Color = Value
+					end
+				end
+			})
 
-            -- Lighting Section
+			-- Lighting Section
 
-            Sections.Lighting:AddToggle('OverrideAmbient', {
-                Text = 'Override Ambient',
-                Default = false,
-            
-                Callback = function(Value)
-                    FeatureTable.Visuals.Lighting.OverrideAmbient.Enabled = Value
-                end
-            }):AddColorPicker('AmbientColor', {
-                Default = Color3.fromRGB(255, 255, 255),
-                Title = 'Ambient Color',
-                Transparency = 0,
-            
-                Callback = function(Value)
-                    if FeatureTable.Visuals.Lighting.OverrideAmbient.Enabled then
-                        FeatureTable.Visuals.Lighting.OverrideAmbient.Color = Value
-    
-                        do --// Properties
-                            
-                            Functions.Normal:SetAmbient("Ambient", Value)
-                            Functions.Normal:SetAmbient("OutdoorAmbient", Value)
-                            Functions.Normal:SetAmbient("ColorShift_Top", Value)
-                            Functions.Normal:SetAmbient("ColorShift_Bottom", Value)
-                            
-                        end
-                    end
-                end
-            })
-            Sections.Lighting:AddToggle('Atmosphere', {
-                Text = 'Atmosphere Density',
-                Default = false,
-            
-                Callback = function(Value)
-                    FeatureTable.Visuals.Lighting.OverrideAtmosphere.Enabled = Value
-                end
-            })
-            
-            Sections.Lighting:AddSlider('AtmosphereDensity', {
-                Text = 'Density',
-                Default = 0,
-                Min = 0,
-                Max = 1,
-                Rounding = 1,
-                Compact = false,
+			Sections.Lighting:AddToggle('OverrideAmbient', {
+				Text = 'Override Ambient',
+				Default = false,
+			
+				Callback = function(Value)
+					FeatureTable.Visuals.Lighting.OverrideAmbient.Enabled = Value
+				end
+			}):AddColorPicker('AmbientColor', {
+				Default = Color3.fromRGB(255, 255, 255),
+				Title = 'Ambient Color',
+				Transparency = 0,
+			
+				Callback = function(Value)
+					if FeatureTable.Visuals.Lighting.OverrideAmbient.Enabled then
+						FeatureTable.Visuals.Lighting.OverrideAmbient.Color = Value
+	
+						do --// Properties
+							
+							Functions.Normal:SetAmbient("Ambient", Value)
+							Functions.Normal:SetAmbient("OutdoorAmbient", Value)
+							Functions.Normal:SetAmbient("ColorShift_Top", Value)
+							Functions.Normal:SetAmbient("ColorShift_Bottom", Value)
+							
+						end
+					end
+				end
+			})
+			Sections.Lighting:AddToggle('Atmosphere', {
+				Text = 'Atmosphere Density',
+				Default = false,
+			
+				Callback = function(Value)
+					FeatureTable.Visuals.Lighting.OverrideAtmosphere.Enabled = Value
+				end
+			})
+			
+			Sections.Lighting:AddSlider('AtmosphereDensity', {
+				Text = 'Density',
+				Default = 0,
+				Min = 0,
+				Max = 1,
+				Rounding = 1,
+				Compact = false,
 
-                Callback = function(Value)
-                    FeatureTable.Visuals.Lighting.OverrideAtmosphere.Density = Value
-                end
-            })
-        end
+				Callback = function(Value)
+					FeatureTable.Visuals.Lighting.OverrideAtmosphere.Density = Value
+				end
+			})
+		end
 
-        do -- Misc Tab
-            Sections.Player:AddToggle('HitboxExpander', {
-                Text = 'Hitbox Expand',
-                Default = false,
+		do -- Misc Tab
+			Sections.Player:AddToggle('HitboxExpander', {
+				Text = 'Hitbox Expand',
+				Default = false,
 
-                Callback = function(Value)
-                    FeatureTable.Misc.Player.HitboxExpand.Enabled = Value
-                end
-            })
+				Callback = function(Value)
+					FeatureTable.Misc.Player.HitboxExpand.Enabled = Value
+				end
+			})
 
-            Sections.Player:AddSlider('HitboxSize', {
-                Text = 'HitboxSize',
-                Default = 2.5,
-                Min = 0,
-                Max = 6.5,
-                Rounding = 1,
-                Compact = false,
+			Sections.Player:AddSlider('HitboxSize', {
+				Text = 'HitboxSize',
+				Default = 2.5,
+				Min = 0,
+				Max = 6.5,
+				Rounding = 1,
+				Compact = false,
 
-                Callback = function(Value)
-                    FeatureTable.Misc.Player.HitboxExpand.Size = Value
-                end
-            })
-        end
-    end
+				Callback = function(Value)
+					FeatureTable.Misc.Player.HitboxExpand.Size = Value
+				end
+			})
+		end
+	end
 
-    do -- Logic
+	do -- Logic
 
-        do -- Functions
+		do -- Functions
 
-            do -- Regular
+			do -- Regular
 
-                do -- Lighting
-                    function Functions.Normal:SetAmbient(Property, Value)
-                        if FeatureTable.Visuals.Lighting.OverrideAmbient.Enabled then
-                            Lighting[Property] = Value
-                        end
-                    end
-                    function Functions.Normal:SetAtmosphere(Property, Value)
-                        if FeatureTable.Visuals.Lighting.OverrideAtmosphere.Enabled then
-                            Lighting:FindFirstChildOfClass('Atmosphere')[Property] = Value
-                        end
-                    end
-                end
+				do -- Lighting
+					function Functions.Normal:SetAmbient(Property, Value)
+						if FeatureTable.Visuals.Lighting.OverrideAmbient.Enabled then
+							Lighting[Property] = Value
+						end
+					end
+					function Functions.Normal:SetAtmosphere(Property, Value)
+						if FeatureTable.Visuals.Lighting.OverrideAtmosphere.Enabled then
+							Lighting:FindFirstChildOfClass('Atmosphere')[Property] = Value
+						end
+					end
+				end
 
-                do -- Player
-                    function Functions.Normal:GetPlayerModel(Player)
-                        local WorldCharacter
-                        if Player ~= nil and Player:FindFirstChild('WorldCharacter') then
-                            WorldCharacter = Player.WorldCharacter
-                        end
-                        return WorldCharacter
-                    end
+				do -- Player
+					function Functions.Normal:GetPlayerModel(Player)
+						local WorldCharacter
+						if Player ~= nil and Player:FindFirstChild('WorldCharacter') then
+							WorldCharacter = Player.WorldCharacter
+						end
+						return WorldCharacter
+					end
 
-                    function Functions.Normal:GetPlayerHeadCollider(Player)
-                        local HeadCollider
-                        if Player ~= nil and Player:FindFirstChild('ServerColliderHead') then
-                            HeadCollider = Player.ServerColliderHead
-                        end
-                        return HeadCollider
-                    end
+					function Functions.Normal:GetPlayerHeadCollider(Player)
+						local HeadCollider
+						if Player ~= nil and Player:FindFirstChild('ServerColliderHead') then
+							HeadCollider = Player.ServerColliderHead
+						end
+						return HeadCollider
+					end
 
-                    -- Happy now? You are so annoying 
-                    function Functions.Normal:GetPlayers()
-                        local PlayerList = {}
-                        for _, Handicaps in Players:GetChildren() do
-                            table.insert(PlayerList, Handicaps.Character)
-                        end
-                        return PlayerList
-                    end
-                end
+					-- Happy now? You are so annoying 
+					function Functions.Normal:GetPlayers()
+						local PlayerList = {}
+						for _, Handicaps in Players:GetChildren() do
+							table.insert(PlayerList, Handicaps.Character)
+						end
+						return PlayerList
+					end
+				end
 
-                do -- Math
-                    function Functions.Normal:Measure(Origin, End)
-                        return (Origin - End).Magnitude
-                    end
-                end
+				do -- Math
+					function Functions.Normal:Measure(Origin, End)
+						return (Origin - End).Magnitude
+					end
+				end
 
-                do -- Item ESP
-                    function Functions.ItemESP:AddInstance(object, data, type)
-                        local text = Drawing.new('Text')
-                        local Type = type
-                    
-                        text.Font = 2
-                    
-                        for index, value in data do
-                            text[index] = value
-                        end
-                    
-                        local connections = {}
-                        table.insert(connections, run_service.RenderStepped:Connect(function()
-                            local vec3, onscreen = Camera:WorldToViewportPoint(object:GetPivot().Position)
-                            if onscreen and FeatureTable.Visuals.ItemsEsp.Enabled then
-                                text.Visible = true 
-                                text.Position = Vector2.new(vec3.X, vec3.Y)
-                                
-                                -- Stupid implementation, but it works eh?
-                                if Type == 'Gun' then
-                                    text.Color = FeatureTable.Visuals.ItemsEsp.GunColor.Color
-                                elseif Type == 'Weapon' then
-                                    text.Color = FeatureTable.Visuals.ItemsEsp.WeaponColor.Color
-                                elseif Type == 'Attachment' then
-                                    text.Color = FeatureTable.Visuals.ItemsEsp.AttachmentsColor.Color
-                                elseif Type == 'Default' then
-                                    text.Color = FeatureTable.Visuals.ItemsEsp.DefaultColor.Color
-                                end
-                    
-                            else
-                                text.Visible = false 
-                            end
-                        end))
-                        table.insert(connections, object.Destroying:Connect(function()
-                            text:Remove()
-                            for _, connection in connections do
-                                connection:Disconnect()
-                            end
-                        end))
-                    end
+				do -- Item ESP
+					function Functions.ItemESP:AddInstance(object, data, type)
+						local text = Drawing.new('Text')
+						local Type = type
+					
+						text.Font = 2
+					
+						for index, value in data do
+							text[index] = value
+						end
+					
+						local connections = {}
+						table.insert(connections, run_service.RenderStepped:Connect(function()
+							local vec3, onscreen = Camera:WorldToViewportPoint(object:GetPivot().Position)
+							if onscreen and FeatureTable.Visuals.ItemsEsp.Enabled then
+								text.Visible = true 
+								text.Position = Vector2.new(vec3.X, vec3.Y)
+								
+								-- Stupid implementation, but it works eh?
+								if Type == 'Gun' then
+									text.Color = FeatureTable.Visuals.ItemsEsp.GunColor.Color
+								elseif Type == 'Weapon' then
+									text.Color = FeatureTable.Visuals.ItemsEsp.WeaponColor.Color
+								elseif Type == 'Attachment' then
+									text.Color = FeatureTable.Visuals.ItemsEsp.AttachmentsColor.Color
+								elseif Type == 'Default' then
+									text.Color = FeatureTable.Visuals.ItemsEsp.DefaultColor.Color
+								end
+					
+							else
+								text.Visible = false 
+							end
+						end))
+						table.insert(connections, object.Destroying:Connect(function()
+							text:Remove()
+							for _, connection in connections do
+								connection:Disconnect()
+							end
+						end))
+					end
 
-                    function Functions.ItemESP:ApplyESP(item)
-                        pcall(function()
-                            if not item:IsA('Model') then return end 
-                        
-                            local name, z_index, type, color = item.Name, 0, 'Default', FeatureTable.Visuals.ItemsEsp.DefaultColor.Color
-                            if item.Name == 'WorldModel' and item:FindFirstChild('Static') then
-                                local highest_score, gun_name = 0, nil
-                                local item_static = item:FindFirstChild('Static')
-                                for _, gun in gun_data:GetChildren() do
-                                    local gun_score = 0
-                                    local world_model = gun:FindFirstChild('WorldModel') -- fists doesnt have world model
-                                
-                                    if world_model then
-                                        local gun_static = world_model:FindFirstChild('Static') -- weapons doesnt have static
-                                        if gun_static then
-                                            for _, gun_static_child in gun_static:GetChildren() do
-                                                if item_static:FindFirstChild(gun_static_child.Name) then
-                                                    gun_score += 1
-                                                    if gun_score > highest_score then
-                                                        highest_score = gun_score
-                                                        gun_name = (gun:FindFirstChild('DisplayName') and gun.DisplayName.Value) or gun.Name 
-                                                    end
-                                                end
-                                            end
-                                        end
-                                    end
-                                end
-                                z_index = 2
-                                color = FeatureTable.Visuals.ItemsEsp.GunColor.Color
-                                name = gun_name or 'Gun'
-                                type = 'Gun'
-                            end
-                            if item.Name == 'WorldModel' and (not item:FindFirstChild('Static')) then
-                                local highest_score, weapon_name = 0, nil
-                                for _, weapon in gun_data:GetChildren() do
-                                    local weapon_score = 0
-                                    local world_model = weapon:FindFirstChild('WorldModel') 
-                                
-                                    if world_model then
-                                        for _, weapon_child in world_model:GetChildren() do
-                                            if item:FindFirstChild(weapon_child.Name) then
-                                                weapon_score += 1
-                                                if weapon_score > highest_score then
-                                                    highest_score = weapon_score
-                                                    weapon_name = (weapon:FindFirstChild('DisplayName') and weapon.DisplayName.Value) or weapon.Name 
-                                                end
-                                            end
-                                        end
-                                    end
-                                end
-                                z_index = 1
-                                name = weapon_name or 'Weapon'
-                                color = FeatureTable.Visuals.ItemsEsp.WeaponColor.Color
-                                type = 'Weapon'
-                            end
-                            if item.Name == 'WorldData' then
-                                local highest_score, attachment_name = 0, nil
-                                for _, attachment in attachments:GetChildren() do
-                                    local attachment_score = 0
-                                    local world_data = attachment:FindFirstChild('WorldData') 
-                                
-                                    if world_data then
-                                        for _, weapon_child in world_data:GetChildren() do
-                                            if item:FindFirstChild(weapon_child.Name) then
-                                                attachment_score += 1
-                                                if attachment_score > highest_score then
-                                                    highest_score = attachment_score
-                                                    attachment_name = (attachment:FindFirstChild('DisplayName') and attachment.DisplayName.Value) or attachment.Name 
-                                                end
-                                            end
-                                        end
-                                    end
-                                end
-                                name = attachment_name or 'Attachment'
-                                color = FeatureTable.Visuals.ItemsEsp.AttachmentsColor.Color
-                                type = 'Attachment'
-                            end
-                        
-                            Functions.ItemESP:AddInstance(item, {
-                                Text = name,
-                                Color = color,
-                                Size = 12,
-                                Outline = true,
-                                ZIndex = z_index
-                            }, type)
-                        end)
-                    end
-                end
-            end
+					function Functions.ItemESP:ApplyESP(item)
+						pcall(function()
+							if not item:IsA('Model') then return end 
+						
+							local name, z_index, type, color = item.Name, 0, 'Default', FeatureTable.Visuals.ItemsEsp.DefaultColor.Color
+							if item.Name == 'WorldModel' and item:FindFirstChild('Static') then
+								local highest_score, gun_name = 0, nil
+								local item_static = item:FindFirstChild('Static')
+								for _, gun in gun_data:GetChildren() do
+									local gun_score = 0
+									local world_model = gun:FindFirstChild('WorldModel') -- fists doesnt have world model
+								
+									if world_model then
+										local gun_static = world_model:FindFirstChild('Static') -- weapons doesnt have static
+										if gun_static then
+											for _, gun_static_child in gun_static:GetChildren() do
+												if item_static:FindFirstChild(gun_static_child.Name) then
+													gun_score += 1
+													if gun_score > highest_score then
+														highest_score = gun_score
+														gun_name = (gun:FindFirstChild('DisplayName') and gun.DisplayName.Value) or gun.Name 
+													end
+												end
+											end
+										end
+									end
+								end
+								z_index = 2
+								color = FeatureTable.Visuals.ItemsEsp.GunColor.Color
+								name = gun_name or 'Gun'
+								type = 'Gun'
+							end
+							if item.Name == 'WorldModel' and (not item:FindFirstChild('Static')) then
+								local highest_score, weapon_name = 0, nil
+								for _, weapon in gun_data:GetChildren() do
+									local weapon_score = 0
+									local world_model = weapon:FindFirstChild('WorldModel') 
+								
+									if world_model then
+										for _, weapon_child in world_model:GetChildren() do
+											if item:FindFirstChild(weapon_child.Name) then
+												weapon_score += 1
+												if weapon_score > highest_score then
+													highest_score = weapon_score
+													weapon_name = (weapon:FindFirstChild('DisplayName') and weapon.DisplayName.Value) or weapon.Name 
+												end
+											end
+										end
+									end
+								end
+								z_index = 1
+								name = weapon_name or 'Weapon'
+								color = FeatureTable.Visuals.ItemsEsp.WeaponColor.Color
+								type = 'Weapon'
+							end
+							if item.Name == 'WorldData' then
+								local highest_score, attachment_name = 0, nil
+								for _, attachment in attachments:GetChildren() do
+									local attachment_score = 0
+									local world_data = attachment:FindFirstChild('WorldData') 
+								
+									if world_data then
+										for _, weapon_child in world_data:GetChildren() do
+											if item:FindFirstChild(weapon_child.Name) then
+												attachment_score += 1
+												if attachment_score > highest_score then
+													highest_score = attachment_score
+													attachment_name = (attachment:FindFirstChild('DisplayName') and attachment.DisplayName.Value) or attachment.Name 
+												end
+											end
+										end
+									end
+								end
+								name = attachment_name or 'Attachment'
+								color = FeatureTable.Visuals.ItemsEsp.AttachmentsColor.Color
+								type = 'Attachment'
+							end
+						
+							Functions.ItemESP:AddInstance(item, {
+								Text = name,
+								Color = color,
+								Size = 12,
+								Outline = true,
+								ZIndex = z_index
+							}, type)
+						end)
+					end
+				end
+			end
 
-            do -- Misc
-                function Functions.Normal:SetPlayerHeadSize(player)
-                    pcall(function()
-                        if FeatureTable.Misc.Player.HitboxExpand.Enabled and player.Character ~= nil and Functions.Normal:GetPlayerHeadCollider(player) then
+			do -- Misc
+				function Functions.Normal:SetPlayerHeadSize(player)
+					pcall(function()
+						if FeatureTable.Misc.Player.HitboxExpand.Enabled and player.Character ~= nil and Functions.Normal:GetPlayerHeadCollider(player) then
 							local head = Functions.Normal:GetPlayerHeadCollider(player)
 
-                        	head.Size = Vector3.new(FeatureTable.Misc.Player.HitboxExpand.Size, FeatureTable.Misc.Player.HitboxExpand.Size, FeatureTable.Misc.Player.HitboxExpand.Size)
-                            head.Transparency = 0
-                        end
-                    end)
-                end
-            end
-        end
-        
-        do -- Loops
-            task.spawn(function()
-                for _, item in item_spawns:GetChildren() do
-                    Functions.ItemESP:ApplyESP(item)
-                end
-                while task.wait() do
-    
-                    do -- Misc
-                        do -- Player Hitbox Expand
-                            for _, Player in Functions.Normal:GetPlayers() do
-                                if Player ~= nil and Player ~= nil and Player ~= Players.LocalPlayer then
-                                    Functions.Normal:SetPlayerHeadSize(Player)
-                                end
-                            end
-                        end
-                        
-                    end
-    
-                    do -- Extra
-                        
-                        do -- FOV Circle
-                            local Dynamic = FeatureTable.Combat.Aimbot.DummyRange / math.tan(math.rad(Camera.FieldOfView / 2))
-                            FOV_CIRCLE.Position = Vector2.new(Storage.Other.ViewportSize.X/2, Storage.Other.ViewportSize.Y/2)
-    
-                            if FeatureTable.Combat.DynamicFOV then
-                                FOV_CIRCLE.Radius = Dynamic
-                            else
-                                FOV_CIRCLE.Radius = FeatureTable.Combat.DummyRange
-                            end
-                        end
-                    end
+							head.Size = Vector3.new(FeatureTable.Misc.Player.HitboxExpand.Size, FeatureTable.Misc.Player.HitboxExpand.Size, FeatureTable.Misc.Player.HitboxExpand.Size)
+							head.Transparency = 0
+						end
+					end)
+				end
+			end
+		end
+		
+		do -- Loops
+			task.spawn(function()
+				for _, item in item_spawns:GetChildren() do
+					Functions.ItemESP:ApplyESP(item)
+				end
+				while task.wait() do
+	
+					do -- Misc
+						do -- Player Hitbox Expand
+							for _, Player in Functions.Normal:GetPlayers() do
+								if Player ~= nil and Player ~= nil and Player ~= Players.LocalPlayer then
+									Functions.Normal:SetPlayerHeadSize(Player)
+								end
+							end
+						end
+						
+					end
+	
+					do -- Extra
+						
+						do -- FOV Circle
+							local Dynamic = FeatureTable.Combat.Aimbot.DummyRange / math.tan(math.rad(Camera.FieldOfView / 2))
+							FOV_CIRCLE.Position = Vector2.new(Storage.Other.ViewportSize.X/2, Storage.Other.ViewportSize.Y/2)
+	
+							if FeatureTable.Combat.DynamicFOV then
+								FOV_CIRCLE.Radius = Dynamic
+							else
+								FOV_CIRCLE.Radius = FeatureTable.Combat.DummyRange
+							end
+						end
+					end
 
-                    do -- Cham ESP
-                        for _, champlayer in Functions.Normal:GetPlayers() do
-                            if champlayer ~= nil then
-                                local actualplayer = Players:GetPlayerFromCharacter(champlayer)
-                                local Highlight = actualplayer:FindFirstChildOfClass('Highlight')
+					do -- Cham ESP
+						for _, champlayer in Functions.Normal:GetPlayers() do
+							if champlayer ~= nil then
+								local actualplayer = Players:GetPlayerFromCharacter(champlayer)
+								local Highlight = actualplayer:FindFirstChildOfClass('Highlight')
 
-                                if FeatureTable.Visuals.Chams.Enabled then
+								if FeatureTable.Visuals.Chams.Enabled then
 
-                                    if not champlayer:FindFirstChild('Highlight') then
-                                        Highlight = Instance.new('Highlight', actualplayer)
-                                    end
-                                    Highlight.Enabled = true
-                                    Highlight.Adornee = champlayer.WorldCharacter
-                                    Highlight.FillColor = FeatureTable.Visuals.Chams.FillColor
-                                    Highlight.OutlineColor = FeatureTable.Visuals.Chams.OutlineColor
-                                    Highlight.FillTransparency = FeatureTable.Visuals.Chams.FillTransparency
-                                    Highlight.OutlineTransparency = FeatureTable.Visuals.Chams.OutlineTransparency
-                                    Highlight.DepthMode = FeatureTable.Visuals.Chams.VisibleOnly and Enum.HighlightDepthMode.Occluded or Enum.HighlightDepthMode.AlwaysOnTop
-              
-                                else
-    
-                                    if Highlight then
-                                        Highlight:Destroy()
-                                    end
-                                end
-                            end
+									if not champlayer:FindFirstChild('Highlight') then
+										Highlight = Instance.new('Highlight', actualplayer)
+									end
+									Highlight.Enabled = true
+									Highlight.Adornee = champlayer.WorldCharacter
+									Highlight.FillColor = FeatureTable.Visuals.Chams.FillColor
+									Highlight.OutlineColor = FeatureTable.Visuals.Chams.OutlineColor
+									Highlight.FillTransparency = FeatureTable.Visuals.Chams.FillTransparency
+									Highlight.OutlineTransparency = FeatureTable.Visuals.Chams.OutlineTransparency
+									Highlight.DepthMode = FeatureTable.Visuals.Chams.VisibleOnly and Enum.HighlightDepthMode.Occluded or Enum.HighlightDepthMode.AlwaysOnTop
+			  
+								else
+	
+									if Highlight then
+										Highlight:Destroy()
+									end
+								end
+							end
 
-                        end
-                    end
+						end
+					end
 
-                end
-            end)
-        end
-        
-        do -- Connections
-            item_spawns.ChildAdded:Connect(function(item)
-                Functions.ItemESP:ApplyESP(item)
-            end)
+				end
+			end)
+		end
+		
+		do -- Connections
+			item_spawns.ChildAdded:Connect(function(item)
+				Functions.ItemESP:ApplyESP(item)
+			end)
 
-            Camera:GetPropertyChangedSignal("ViewportSize"):Connect(function()
-                Storage.Other.ViewportSize = Camera.ViewportSize
-            end)
-            
-            do
+			Camera:GetPropertyChangedSignal("ViewportSize"):Connect(function()
+				Storage.Other.ViewportSize = Camera.ViewportSize
+			end)
+			
+			do
 
-                Lighting:GetPropertyChangedSignal("Ambient"):Connect(function()
-                    Functions.Normal:SetAmbient("Ambient", FeatureTable.Visuals.Lighting.OverrideAmbient.Color)
-                end)
+				Lighting:GetPropertyChangedSignal("Ambient"):Connect(function()
+					Functions.Normal:SetAmbient("Ambient", FeatureTable.Visuals.Lighting.OverrideAmbient.Color)
+				end)
 
-                Lighting:GetPropertyChangedSignal("OutdoorAmbient"):Connect(function()
-                    Functions.Normal:SetAmbient("OutdoorAmbient", FeatureTable.Visuals.Lighting.OverrideAmbient.Color)
-                end)
+				Lighting:GetPropertyChangedSignal("OutdoorAmbient"):Connect(function()
+					Functions.Normal:SetAmbient("OutdoorAmbient", FeatureTable.Visuals.Lighting.OverrideAmbient.Color)
+				end)
 
-                Lighting:GetPropertyChangedSignal("ColorShift_Top"):Connect(function()
-                    Functions.Normal:SetAmbient("ColorShift_Top", FeatureTable.Visuals.Lighting.OverrideAmbient.Color)
-                end)
+				Lighting:GetPropertyChangedSignal("ColorShift_Top"):Connect(function()
+					Functions.Normal:SetAmbient("ColorShift_Top", FeatureTable.Visuals.Lighting.OverrideAmbient.Color)
+				end)
 
-                Lighting:GetPropertyChangedSignal("ColorShift_Bottom"):Connect(function()
-                    Functions.Normal:SetAmbient("ColorShift_Bottom", FeatureTable.Visuals.Lighting.OverrideAmbient.Color)
-                end)
+				Lighting:GetPropertyChangedSignal("ColorShift_Bottom"):Connect(function()
+					Functions.Normal:SetAmbient("ColorShift_Bottom", FeatureTable.Visuals.Lighting.OverrideAmbient.Color)
+				end)
 
-                Lighting:FindFirstChildOfClass('Atmosphere'):GetPropertyChangedSignal("Density"):Connect(function()
-                    Functions.Normal:SetAtmosphere("Density", FeatureTable.Visuals.Lighting.OverrideAtmosphere.Density)
-                end)
+				Lighting:FindFirstChildOfClass('Atmosphere'):GetPropertyChangedSignal("Density"):Connect(function()
+					Functions.Normal:SetAtmosphere("Density", FeatureTable.Visuals.Lighting.OverrideAtmosphere.Density)
+				end)
 
-                
-                
-            end
-            
-        end
-    end
+				
+				
+			end
+			
+		end
+	end
 end
 
 
 Library:OnUnload(function()
-    Library.Unloaded = true
+	Library.Unloaded = true
 end)
 
 local MenuGroup = Tabs['Settings']:AddLeftGroupbox('Menu')
