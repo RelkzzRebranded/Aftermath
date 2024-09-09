@@ -14,8 +14,6 @@ G2L["9"] = Instance.new("TextLabel")
 G2L["10"] = Instance.new("UITextSizeConstraint")
 G2L["11"] = Instance.new("TextLabel")
 G2L["12"] = Instance.new("UITextSizeConstraint")
-G2L["13"] = Instance.new("TextLabel")
-G2L["14"] = Instance.new("UITextSizeConstraint")
 G2L["15"] = Instance.new("UIAspectRatioConstraint")
 
 
@@ -28,6 +26,7 @@ G2L["0"].Parent = game.Players.LocalPlayer.PlayerGui
 
 G2L["1"].Name = [[Main]]
 G2L["1"].Active = false
+G2L["1"].ResetOnSpawn = false
 G2L["1"].AnchorPoint = Vector2.new(0, 0)
 G2L["1"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 G2L["1"].BackgroundTransparency = 0
@@ -220,38 +219,6 @@ G2L["11"].Parent = G2L["3"]
 G2L["12"].Name = [[UITextSizeConstraint]]
 G2L["12"].MaxTextSize = 28
 G2L["12"].Parent = G2L["11"]
-
-G2L["13"].Name = [[Slot5]]
-G2L["13"].FontFace = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal)
-G2L["13"].Text = [[1 ->]]
-G2L["13"].TextColor3 = Color3.fromRGB(255, 0, 208)
-G2L["13"].TextScaled = true
-G2L["13"].TextSize = 14
-G2L["13"].TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
-G2L["13"].TextStrokeTransparency = 1
-G2L["13"].TextWrapped = true
-G2L["13"].TextXAlignment = Enum.TextXAlignment.Left
-G2L["13"].TextYAlignment = Enum.TextYAlignment.Center
-G2L["13"].Active = false
-G2L["13"].AnchorPoint = Vector2.new(0, 0)
-G2L["13"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-G2L["13"].BackgroundTransparency = 1
-G2L["13"].BorderColor3 = Color3.fromRGB(0, 0, 0)
-G2L["13"].BorderSizePixel = 0
-G2L["13"].ClipsDescendants = false
-G2L["13"].Draggable = false
-G2L["13"].Position = UDim2.new(0, 0, 0, 0)
-G2L["13"].Rotation = 0
-G2L["13"].Selectable = false
-G2L["13"].SelectionOrder = 0
-G2L["13"].Size = UDim2.new(1, 0, 0.15, 0)
-G2L["13"].Visible = true
-G2L["13"].ZIndex = 1
-G2L["13"].Parent = G2L["3"]
-
-G2L["14"].Name = [[UITextSizeConstraint]]
-G2L["14"].MaxTextSize = 28
-G2L["14"].Parent = G2L["13"]
 
 G2L["15"].Name = [[UIAspectRatioConstraint]]
 G2L["15"].AspectRatio = 1.777344
