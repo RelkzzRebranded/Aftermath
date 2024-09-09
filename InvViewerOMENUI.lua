@@ -21,12 +21,12 @@ G2L["15"] = Instance.new("UIAspectRatioConstraint")
 --Propeties:
 G2L["0"].Name = [[InventoryViewerUI]]
 G2L["0"].Enabled = true
+G2L["0"].ResetOnSpawn = false
 G2L["0"].ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 G2L["0"].Parent = game.Players.LocalPlayer.PlayerGui
 
 G2L["1"].Name = [[Main]]
 G2L["1"].Active = false
-G2L["1"].ResetOnSpawn = false
 G2L["1"].AnchorPoint = Vector2.new(0, 0)
 G2L["1"].BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 G2L["1"].BackgroundTransparency = 0
