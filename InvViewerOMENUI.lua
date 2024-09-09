@@ -23,7 +23,7 @@ G2L["0"].Name = [[InventoryViewerUI]]
 G2L["0"].Enabled = true
 G2L["0"].ResetOnSpawn = false
 G2L["0"].ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-G2L["0"].Parent = game.Players.LocalPlayer.PlayerGui
+G2L["0"].Parent = cloneref(game.CoreGui)
 
 G2L["1"].Name = [[Main]]
 G2L["1"].Active = false
